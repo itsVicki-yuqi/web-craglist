@@ -5,24 +5,26 @@ import logo from '../images/Beck-logo.jpg';
 
 function Header(){
     return(
-            <div>
-            <Navbar expand="lg" bg="light" variant="light" style={{paddingBottom:'2rem'}} >
-                <Navbar.Brand href="/">
+            
+            <Navbar expand="lg" bg="light" variant="light" style={{paddingBottom:'1rem'}} >
+                <Navbar.Brand href="/" className="col-6 py-3">
                 <img src={logo} class="d-inline-block align-top mx-2" width="30" height="30"/>
                 The BeckGroup
 
                 
                 </Navbar.Brand>
-            <Nav className="justify-content-end"> 
-                <Nav.Link href="/signin">
+            <Nav className="col-3 justify-content-end"> 
+                <Nav.Link href="/profile">
                     Sign in
                 </Nav.Link>
             </Nav>
-            <Form inline>
-                <Form.Control className="mr-sm-2"  type="text" placeholder="Search" aria-label="Search"/>
+            <Nav inline className="col-3 mx-auto">
+            <Form >
+                <Form.Control className="w-50 mx-auto"  type="text" placeholder="Search" aria-label="Search"/>
             </Form>
+            </Nav>
             </Navbar>
-            </div>
+            
     
         
     )

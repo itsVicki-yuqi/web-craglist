@@ -7,7 +7,7 @@ export default class Home extends Component {
     render(){
         return(
             
-           <Container className="mt-3">
+           <Container className="my-3">
                <Row className="d-flex flex-wrap">
                    <Col>
                         <Card style={{width:'18rem', height:'28rem'}}>
