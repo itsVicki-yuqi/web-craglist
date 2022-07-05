@@ -2,9 +2,11 @@ import React, {Component} from "react";
 import {Container, Row, Col, Carousel } from "react-bootstrap";
 import img1 from "../images/images.jfif";
 import img2 from "../images/images2.jfif";
+import {useParams} from 'react-router-dom';
  
-export default class ProductDetails extends Component {
-    render(){
+function ProductDetails (props) {
+    const params = useParams();
+    console.log(props);
         return(
            <Container>
                <Row >
@@ -31,5 +33,7 @@ export default class ProductDetails extends Component {
            
             
         )
-    }
+    
 }
+
+export default ProductDetails;

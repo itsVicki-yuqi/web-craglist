@@ -8,6 +8,7 @@ import Home from './components/Home';
 import Signin from './components/Signin';
 import ProductDetails from './routes/productDetails';
 import Profile from './components/Profile.js';
+import NewProduct from './components/NewProduct';
 
 function App() {
 
@@ -17,10 +18,11 @@ function App() {
         <Router>
           <Header/>
           <Routes>
-            <Route path="/" element={<Home />}/>
+            <Route exact path="/" element={<Home />}/>
             <Route path="/signin" element={<Signin />}/>
-            <Route path="/productDetails" element={<ProductDetails />}/>
+            <Route path="/productDetails/:id" element={<ProductDetails />}/>
             <Route path="/profile" element={<Profile />} />
+            <Route path="/newproduct" element={<NewProduct/>}  />
           </Routes>
         </Router>
         <Footer />
