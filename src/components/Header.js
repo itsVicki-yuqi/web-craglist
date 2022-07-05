@@ -1,9 +1,13 @@
+import { useIsAuthenticated } from "@azure/msal-react";
 import React from "react";
 
 import {Navbar, Nav, Form, Button} from 'react-bootstrap';
 import logo from '../images/Beck-logo.jpg';
+import { SignInButton } from "./SignInButton";
+import { SignOutButton } from "./SignOutButton";
 
 function Header(){
+    const isAuthenticated = useIsAuthenticated();
     return(
             
             <Navbar expand="lg" bg="light" variant="light" style={{paddingBottom:'1rem'}} >
@@ -14,9 +18,7 @@ function Header(){
                 
                 </Navbar.Brand>
             <Nav className="col-3 justify-content-end"> 
-                <Nav.Link href="/profile">
-                    Sign in
-                </Nav.Link>
+                {isAuthenticated?<SignOutButton/> : <SignInButton/>}
             </Nav>
             <Nav inline className="col-3 mx-auto">
             <Form >
