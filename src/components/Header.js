@@ -5,6 +5,7 @@ import {Navbar, Nav, Form, Button} from 'react-bootstrap';
 import logo from '../images/Beck-logo.jpg';
 import { SignInButton } from "./SignInButton";
 import { SignOutButton } from "./SignOutButton";
+import {Link} from 'react-router-dom';
 
 function Header(){
     const isAuthenticated = useIsAuthenticated();

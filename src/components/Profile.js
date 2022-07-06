@@ -4,7 +4,8 @@ import profileImage from "../images/profileImage.png";
 import image1 from '../images/1.jpg';
 import {Link} from 'react-router-dom';
 import {useSelector, useDispatch} from 'react-redux';
-import {saveProduct} from '../reducers/productSlice'
+import {saveProduct} from '../reducers/productSlice';
+import {useMsal} from '@azure/msal-react';
 
 function Profile() {
     const dispatch = useDispatch();
@@ -13,7 +14,10 @@ function Profile() {
     const handleClick = () =>{
         dispatch(saveProduct());
         console.log("click");
-    }
+    };
+    const {instance, accounts } = useMsal();
+    console.log(accounts[0]);
+
 
         return(
             <Container>
@@ -31,10 +35,10 @@ function Profile() {
                                 <div className="d-flex flex-column align-items-center text-center">
                                     <Card.Img className="rounded-circle" style={{width:'150px'}} src={profileImage}/>
                                     <div className="mt-3">
-                                        <h4>Tony Stark</h4>
+                                        <h4>{accounts[0].name}</h4>
                                         <p className="text-secondary mb-1">Engineer</p>
                                         <p className="text-muted font-size-sm mb-1">Malibu, California</p>
-                                        <p className="text-muted font-size-sm">tony@gmail.com</p>
+                                        <p className="text-muted font-size-sm">{accounts[0].username}</p>
                                         
                                     </div>
                                 </div>
