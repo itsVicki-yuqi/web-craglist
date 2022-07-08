@@ -1,22 +1,12 @@
-import React, {Component} from "react";
+import React from "react";
 import {Nav, Container, Breadcrumb, Row, Col, Card, Button, Navbar} from 'react-bootstrap';
 import profileImage from "../images/profileImage.png";
 import image1 from '../images/1.jpg';
 import {Link} from 'react-router-dom';
-import {useSelector, useDispatch} from 'react-redux';
-import {saveProduct} from '../reducers/productSlice';
 import {useMsal} from '@azure/msal-react';
 
 function Profile() {
-    const dispatch = useDispatch();
-    const price = useSelector(state => state.product.price);
-    console.log(price);
-    const handleClick = () =>{
-        dispatch(saveProduct());
-        console.log("click");
-    };
     const {instance, accounts } = useMsal();
-    console.log(accounts[0]);
 
 
         return(
@@ -36,7 +26,6 @@ function Profile() {
                                     <Card.Img className="rounded-circle" style={{width:'150px'}} src={profileImage}/>
                                     <div className="mt-3">
                                         <h4>{accounts[0].name}</h4>
-                                        <p className="text-secondary mb-1">Engineer</p>
                                         <p className="text-muted font-size-sm mb-1">Malibu, California</p>
                                         <p className="text-muted font-size-sm">{accounts[0].username}</p>
                                         
@@ -56,7 +45,7 @@ function Profile() {
                                             <h6 className="mb-0">Full Name</h6>
                                         </Col>
                                         <Col sm={9} className="text-secondary">
-                                            Tony Stark
+                                        {accounts[0].name}
                                         </Col>
                                     </Row>
                                     <hr/>
@@ -74,7 +63,7 @@ function Profile() {
                                             <h6 className="mb-0">Email Address</h6>
                                         </Col>
                                         <Col sm={9} className="text-secondary">
-                                            stark@gmail.com
+                                        {accounts[0].username}
                                         </Col>
                                     </Row>
                                     <hr/>
@@ -87,13 +76,6 @@ function Profile() {
                                         </Col>
                                     </Row>
                                     <hr/>
-                                    <Row>
-                                        <Col sm={12}>
-                                            <Link to={"/editprofile"}>
-                                                <Button className="outline-primary">Edit</Button>
-                                            </Link>
-                                        </Col>
-                                    </Row>
                                </Card.Body>
                             </Card>
                         </Row>
@@ -101,7 +83,7 @@ function Profile() {
                     </Col>
                 </Row>
                 <Navbar className="light bg-light mb-3">
-                   <h3 className="mx-auto">Tony's Posts</h3> 
+                   <h3 className="mx-auto">{accounts[0].name}'s Posts</h3> 
                 </Navbar>
                 <Navbar className="mb-3">
                     <Button className="btn-sm mx-auto border-3 rounded" variant="outline-secondary">

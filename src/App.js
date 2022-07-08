@@ -9,6 +9,7 @@ import Signin from './components/Signin';
 import ProductDetails from './routes/productDetails';
 import Profile from './components/Profile.js';
 import NewProduct from './components/NewProduct';
+import { AuthenticatedTemplate } from '@azure/msal-react';
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
       <Container>
         <Router>
           <Header/>
+          <AuthenticatedTemplate>
           <Routes>
             <Route exact path="/" element={<Home />}/>
             <Route path="/signin" element={<Signin />}/>
@@ -24,6 +26,8 @@ function App() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/newproduct" element={<NewProduct/>}  />
           </Routes>
+          </AuthenticatedTemplate>
+          
         </Router>
         <Footer />
       </Container>

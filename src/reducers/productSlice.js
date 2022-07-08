@@ -24,12 +24,14 @@ export const productSlice = createSlice({
         saveProduct: (state, action) => {
             const newProduct = {
                 id: Date.now(),
+                userID: action.payload.userID,
                 title: action.payload.title,
                 price: action.payload.price,
                 description: action.payload.description,
                 location: action.payload.location,
                 condition: action.payload.condition,
-                category: action.payload.category
+                category: action.payload.category,
+                image: action.payload.image
             };
             state.push(newProduct);
             

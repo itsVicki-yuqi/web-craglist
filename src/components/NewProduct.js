@@ -5,8 +5,16 @@ import {SiVenmo} from 'react-icons/si';
 import { useDispatch } from "react-redux";
 import {saveProduct} from '../reducers/productSlice';
 import {Link} from 'react-router-dom';
+import Webcam from "react-webcam";
+import {useMsal} from '@azure/msal-react';
 
+const WebcamComponent = () => <Webcam />;
 
+const videoConstraints = {
+    width: 220,
+    height: 200,
+    facingMode: "user"
+};
 
 function NewProduct(){
     const [title, setTitle] = useState('');
@@ -16,11 +24,23 @@ function NewProduct(){
     const [condition, setCondition] = useState('');
     const [category, setCategory] = useState('');
 
+    const {instance, accounts } = useMsal();
+    const userID = accounts[0].localAccountId;
+    console.log(userID);
+    const webcamRef = React.useRef(null);
+    const [image, setImage] = useState('');
+    const capture = React.useCallback(
+        () => {
+            const imageSrc = webcamRef.current.getScreenshot();
+            setImage(imageSrc);
+        },
+        [webcamRef]
+    );
     const dispatch = useDispatch();
 
     const submitHandler = (e) => {
         e.preventDefault();
-        dispatch(saveProduct({title, price, description, location, condition, category}));
+        dispatch(saveProduct({title, userID, price, description, location, condition, category, image}));
         console.log("dispatch")
     };
     return(
@@ -93,6 +113,27 @@ function NewProduct(){
                         </Form.Group>                    
                     </Form.Group>
                     <Form.Group as={Row} className="mb-3">
+                        <div className='webcam-container'>
+                            {image =='' ? 
+                                <Webcam
+                                audio={false}
+                                height={200}
+                                ref={webcamRef}
+                                screenshotFormat="image/jpeg"
+                                width={220}
+                                videoConstraints={videoConstraints}
+                                />
+                            :<img src={image}/>
+                            }
+                            <div>
+                                {image != '' ? 
+                                    <button onClick={(e) => {e.preventDefault(); setImage('')}}>Retake image</button> :
+                                    <button onClick={(e)=>{e.preventDefault(); capture();}}>Capture</button>
+            
+                                }
+                            </div>
+
+                        </div>
                         <Form.Group as={Col} md="6" className="input-group">
                             <Form.Label>Upload pictures</Form.Label>
                             <div className="input-group">
