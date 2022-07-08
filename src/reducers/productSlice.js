@@ -6,14 +6,16 @@ const initialState = [
         title: "shoe", 
         price: 20,
         description: "nothing",
-        location: "Dallas, TX"
+        location: "Dallas, TX",
+        category: "clothes"
     },
     {
         id: 2,
-        title: "t-shirt",
+        title: "Books",
         price: 25,
         description: "I dont know what to say",
-        location: "Tampa, FL"
+        location: "Tampa, FL",
+        category: "books"
     }
 ]
 

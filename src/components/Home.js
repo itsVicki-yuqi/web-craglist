@@ -1,6 +1,6 @@
-import React, {Component, useState} from "react";
+import React, {Component, useEffect, useState} from "react";
 import {Link} from 'react-router-dom';
-import {Container, Card, Button, Row, Col } from 'react-bootstrap';
+import {Container, Card, Button, Row, Col, Form } from 'react-bootstrap';
 import image1 from '../images/1.jpg';
 import { useSelector } from "react-redux";
 import { AuthenticatedTemplate, UnauthenticatedTemplate, useMsal } from "@azure/msal-react";
@@ -44,11 +44,33 @@ function ProfileContent() {
 
 function Home() {
     const productList = useSelector((state) => state.product);
+    const [filteredList, setFilteredList] = useState(productList);
+
+    const [selectedCategory, setSelectedCategory] = useState("");
+
+    const filterByCategory = (filteredList) => {
+        if(!selectedCategory){
+            return filteredList;
+        }
+        const filteredProduct = filteredList.filter((product) => product.category === selectedCategory);
+        return filteredProduct;
+    };
+    const handleCategoryChange = (e) => {setSelectedCategory(e.target.value)};
+    useEffect(() => {
+        var filteredList = filterByCategory(productList);
+        setFilteredList(filteredList);
+
+    }, [selectedCategory]);
+    console.log(filteredList);
         return(
            <Container className="my-3">
-                <ProfileContent/>
+                <Form.Select onChange={handleCategoryChange} value={selectedCategory}>
+                    <option selected value="">Select a category</option>
+                    <option value="clothes">Clothes</option>
+                    <option value="books">Books</option>
+                </Form.Select>
                <Row className="d-flex flex-wrap">
-                    {productList.map((product)=>
+                    {filteredList.map((product)=>
                     <Col key={product.id} className="p-2 flex-fill col-example" xs={4} sm={4}>
                         <Card style={{width:'18rem', height:'28rem'}}>
                             <Link style={{ color: 'black' }} to={'/productDetails/' + product.id}>

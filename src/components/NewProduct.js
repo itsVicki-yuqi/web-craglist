@@ -96,12 +96,12 @@ function NewProduct(){
                             <Form.Label>Category</Form.Label>
                             <Form.Select value={category} onChange={(e) => setCategory(e.target.value)}>
                                 <option selected>-</option>
-                                <option value="appliance">Appliances</option>
+                                <option value="appliances">Appliances</option>
                                 <option value="baby">Baby and Kid</option>
-                                <option value="furniture">Furnitures</option>
-                                <option value="cloth">Clothes</option>
-                                <option value="book">Books</option>
-                                <option value="electronic">Electronics</option>
+                                <option value="furnitures">Furnitures</option>
+                                <option value="clothes">Clothes</option>
+                                <option value="books">Books</option>
+                                <option value="electronics">Electronics</option>
 
                             </Form.Select>
                         </Form.Group>                    
